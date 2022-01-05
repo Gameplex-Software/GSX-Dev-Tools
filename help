@@ -1,0 +1,7 @@
+source variables
+
+echo "${BLUE}Gameplex Software Developer tools v:",$VERSIONID${NC} >> ${LOG} echo
+echo "" >> ${LOG} echo
+echo "Some Example text" >> ${LOG} echo
+echo "" >> ${LOG} echo
+echo "" >> ${LOG} echo
