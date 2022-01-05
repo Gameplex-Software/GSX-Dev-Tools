@@ -1,1 +1,4 @@
+source variables
+
 rm 0
+echo "Removed file: '0' from the root directory." >> ${LOG} echo
