@@ -1,3 +1,5 @@
+#!/bin/bash
+
 VERSIONID="0.0.7"
 RED="\033[0;31m"
 REDBG="\e[1;41m"

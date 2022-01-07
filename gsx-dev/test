@@ -1,17 +1,18 @@
+#!/bin/bash
+
 source variables
 
-echo "" >> ${LOG} echo
-echo "Testing Gameplex Software tools files..." >> ${LOG} echo
-echo "checking that all ${FILECT} required files are present..." | xargs >> ${LOG} echo
-
+echo ""        
+echo "Testing Gameplex Software tools files..."        
+echo "checking that all ${FILECT} required files are present..." | xargs        
 sleep 2
 
 MISSINGFILES=$((6-$FILECT))
 
 if [ $MISSINGFILES -gt 0 ]
 then
-    echo "Missing ${MISSINGFILES} file(s)" >> ${LOG} echo
+    echo "Missing ${MISSINGFILES} file(s)"        
 else
-    echo "Gameplex Software developer tools is intact!" >> ${LOG} echo
+    echo "Gameplex Software developer tools is intact!"        
 fi
 echo ""
