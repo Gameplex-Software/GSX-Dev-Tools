@@ -1,5 +1,5 @@
 # GXS-Dev-Tools
-A testing release of Gameplex's Developer tools (Not yet functional)
+A testing release of Gameplex's Developer tools (Not yet fully functional)
 
 ## Currently supports
 * Git
