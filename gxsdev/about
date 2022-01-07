@@ -1,7 +1,0 @@
-source variables
-
-echo "" >> ${LOG} echo
-echo "${BLUE}Gameplex Software Developer tools v:",$VERSIONID${NC} >> ${LOG} echo
-echo "Created by: Gameplex Software" >> ${LOG} echo
-echo "©Gameplex Software 2022" >> ${LOG} echo
-echo "" >> ${LOG} echo
