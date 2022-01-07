@@ -2,8 +2,11 @@
 
 source variables
 
-echo "${BLUE}Gameplex Software Developer tools v:",$VERSIONID${NC}        
-echo ""        
-echo "Some Example text"        
-echo ""        
-echo ""        
+echo " 
++-----------------------------------------Gameplex Software Developer tools v:$VERSIONID--------------------------------------------+
+|                                                                                                                              |
+| help – Displays Help Information screen                remove – Deletes a file                                               |        
+| repo – Access the GXS Version control system           test – Verifies that your inastallation of our tools is intact        |
+| new – Can create new files or folders on your system                                                                         |
+| rename – rename a file in any location
++------------------------------------------------------------------------------------------------------------------------------+"

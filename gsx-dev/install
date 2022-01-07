@@ -13,7 +13,7 @@ if [[ $# == 0 ]]; then
   "
 
   afplay ./storage/assets/error.mov
-  osascript -e 'tell app "System Events" to display dialog "My name is bash and I rock da house"'>/dev/null
+  osascript -e 'tell app "System Events" to display dialog "This will begin the installation"'>/dev/null
   source setup
   else
     if [[ $# == 1 ]]; then
@@ -26,3 +26,4 @@ if [[ $# == 0 ]]; then
         echo "+------------------------------------------------------------------------------------+"
     fi
   fi
+fi

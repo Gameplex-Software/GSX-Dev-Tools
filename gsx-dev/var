@@ -1,0 +1,10 @@
+if [[ $# == 2 ]]; then
+    echo "\n$1='$2'" >> variables
+  else
+    echo ""
+    echo "+------------------------------------------------------------------------------------+"
+    echo "| Syntax error: This command only accepts 2 arguments, $# arguments were provided    |"
+    echo "| Correct Syntax: 'variable (var name) (value)                                       |"
+    echo "+------------------------------------------------------------------------------------+"
+    echo ""
+fi
