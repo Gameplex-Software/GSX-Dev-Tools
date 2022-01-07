@@ -17,6 +17,12 @@ if [[ $# == 0 ]]; then
   source setup
   else
     if [[ $# == 1 ]]; then
-
+      wget "https://gameplex-software.github.io/CDN/devtools-addons/$1"
+    else
+      if [[ $# == 2 ]]; then
+        echo "+------------------------------------------------------------------------------------+"
+        echo "|Syntax error: This command only accepts 0 or 1 arguments, $# arguments were provided |"
+        echo "|Correct Syntax: 'install (package name)                                             |"
+        echo "+------------------------------------------------------------------------------------+"
     fi
   fi
