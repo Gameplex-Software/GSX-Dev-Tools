@@ -2,148 +2,154 @@
 
 source variables
 
-if [ $1 == "create" ]; then
-    if [ -d "$HOME/Documents/GX-Dev-Repos/$2" ]; then
-        echo "This Git repository already exists, re-initilizing repository..."
-        cd ~/Documents/GX-Dev-Repos/$2
-        git init
-      else 
-        if [ $# == 2 ]; then
-            cd ~/Documents
-            mkdir GX-Dev-Repos
-            cd ./GX-Dev-Repos
-            mkdir $2
-            cd ./$2
-            git init
-            echo ""
-            echo "+----------------------------Created New Git Repository------------------------------+"
-            echo "|A new git repo has been created in Documents/GX-Dev-Repos/                          |"
-            echo "|                                                                                    |"
-            echo "+------------------------------------------------------------------------------------+"
-            echo ""
-          else        
-            echo ""
-            echo "+------------------------------------------------------------------------------------+"
-            echo "|Syntax error: This command only accepts 2 arguments, $# arguments were provided     |"
-            echo "|Correct Syntax: 'new <Directory> <Folder name>                                      |"
-            echo "+------------------------------------------------------------------------------------+"
-            echo ""
-            afplay ./storage/assets/error.mov
-            exit 1
-         fi
+check_repo_folder () {
+    if [[ -d "$HOME/Documents/GX-Dev-Repos/" ]]; then
+      echo "Found repos folder"
+    else
+      echo "Repos folder not found, creating it..."
+      echo "Done"
+      cd "~/Documents/"
+      mkdir GX-Dev-Repos
     fi
+}
+
+if [[ $1 == "create" ]]; then
+  if [[ -d "$HOME/Documents/GX-Dev-Repos/$2" ]]; then
+    echo "This Git repository already exists, re-initilizing repository..."
+    cd ~/Documents/GX-Dev-Repos/$2
+    git init
+  else 
+    if [[ $# == 2 ]]; then
+      cd ~/Documents
+      mkdir GX-Dev-Repos
+      cd ./GX-Dev-Repos
+      mkdir $2
+      cd ./$2
+      git init
+      echo ""
+      echo "+----------------------------Created New Git Repository------------------------------+"
+      echo "|A new git repo has been created in Documents/GX-Dev-Repos/                          |"
+      echo "|                                                                                    |"
+      echo "+------------------------------------------------------------------------------------+"
+      echo ""
+    else        
+      echo ""
+      echo "+------------------------------------------------------------------------------------+"
+      echo "|Syntax error: This command only accepts 2 arguments, $# arguments were provided     |"
+      echo "|Correct Syntax: 'repo create <repo name>                                            |"
+      echo "+------------------------------------------------------------------------------------+"
+      echo ""
+      afplay ./storage/assets/error.mov
+      exit 1
+    fi
+  fi
+else
+  if [[ $1 == "clone" ]]; then
+    if [[ $# == 3 ]]; then
+      if [[ -d "$HOME/Documents/GX-Dev-Repos/$2" ]]; then
+        check_repo_folder
+        cd "~/Documents/GX-Dev-Repos/"
+        git clone $2
+        echo ""
+        echo "+----------------------------Created New Git Repository------------------------------+"
+        echo "|A new git repo has been created in Documents/GX-Dev-Repos/                          |"
+        echo "|                                                                                    |"
+        echo "+------------------------------------------------------------------------------------+"
+        echo ""
+      fi
+    else        
+      echo ""
+      echo "+------------------------------------------------------------------------------------+"
+      echo "|Syntax error: This command only accepts 3 or 4 arguments, $# arguments were provided |"
+      echo "|Correct Syntax: 'repo clone <URL> <Local name>                                      |"
+      echo "+------------------------------------------------------------------------------------+"
+      echo ""
+      afplay ./storage/assets/error.mov
+      exit 1
+    fi
+  fi
+fi 
+
+if [[ $1 == "open" ]]; then
+  if [[ $# == 2 ]]; then
+    if [[ -d "$HOME/Documents/GX-Dev-Repos/$2" ]]; then
+      open ~/Documents/GX-Dev-Repos/$2
+      echo "Opened test repo in finder."
+    else
+      echo "
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Error: Repository does not exist, try cloning it with 'repo clone $2'
+"
+      afplay ./storage/assets/error.mov
+    fi
+  else
+    echo "+------------------------------------------------------------------------------------+"
+    echo "|Syntax error: This command only accepts 2 arguments, $# arguments were provided     |"
+    echo "|Correct Syntax: 'new (dir|file)<Directory> <Folder name>                            |"
+    echo "+------------------------------------------------------------------------------------+"
+    afplay ./storage/assets/error.mov
+  fi
 fi
 
-if [ $1 == "open" ]; then
-    if [ $# == 2 ]; then
-        open ~/Documents/GX-Dev-Repos/$2
-        echo "Opened test repo in finder."
+if [[ $1 == "new" ]]; then
+  if [[ $2 == "dir" ]]; then
+    if [[ $# == 3 ]]; then
+      mkdir $3
+      echo "Successfully created the folder at the current path $2"
+    else
+      if [[ $# == 3 ]]; then
+        cd $2
+          mkdir $3
+          cd "${INSTALLDIR}"
+          echo "$INSTALLDIR"
+          echo "Successfully created the folder $3 at path $2"   
       else
         echo "+------------------------------------------------------------------------------------+"
-        echo "|Syntax error: This command only accepts 2 arguments, $# arguments were provided     |"
-        echo "|Correct Syntax: 'new (dir|file)<Directory> <Folder name>                            |"
+        echo "|Syntax error: This command only accepts 2 or 3 arguments, $# arguments were provided|"
+        echo "|Correct Syntax: 'repo new (dir|file) <Repo ID> <Folder name>                        |"
         echo "+------------------------------------------------------------------------------------+"
         afplay ./storage/assets/error.mov
+        exit 1
+      fi
     fi
-fi
-
-if [ $1 == "new" ]; then
-    if [ $2 == "dir" ]; then
-        if [ $# == 3 ]; then
-            mkdir $3
-            echo "Successfully created the folder at the current path $2"
-          else
-           if [ $# == 3 ]; then
-               cd $2
-               mkdir $3
-               cd "${INSTALLDIR}"
-               echo "$INSTALLDIR"
-               echo "Successfully created the folder $3 at path $2"   
-             else
-              echo "+------------------------------------------------------------------------------------+"
-              echo "|Syntax error: This command only accepts 2 or 3 arguments, $# arguments were provided|"
-              echo "|Correct Syntax: 'repo new (dir|file) <Repo ID> <Folder name>                        |"
-              echo "+------------------------------------------------------------------------------------+"
-              afplay ./storage/assets/error.mov
-              exit 1
-           fi
-        fi
   else
-    if [ $1 == "file" ]; then
-        if [ $# == 2 ]; then
-            touch $2
-            echo "Successfully created the file $2 at the current path"
-          else
-           if [ $# == 3 ]; then
-               cd $2
-               touch $3
-               cd "${INSTALLDIR}"
-               echo "$INSTALLDIR"
-               echo "Successfully created the file $3 at path $2"   
-             else
-              echo "+------------------------------------------------------------------------------------+"
-              echo "|Syntax error: This command only accepts 2 or 3 arguments, $# arguments were provided|"
-              echo "|Correct Syntax: 'new (dir|file) <Directory> <Folder name>                            |"
-              echo "+------------------------------------------------------------------------------------+"
-              afplay ./storage/assets/error.mov
-              exit 1
-           fi
-        fi    
-fi
-
-if [ $1 == "open" ]; then
-    if [ $# == 2 ]; then
-        open ~/Documents/GX-Dev-Repos/$2
-        echo "Opened test repo in finder."
+    if [[ $1 == "file" ]]; then
+      if [[ $# == 2 ]]; then
+        touch $2
+          echo "Successfully created the file $2 at the current path"
       else
-        echo "+------------------------------------------------------------------------------------+"
-        echo "|Syntax error: This command only accepts 2 arguments, $# arguments were provided     |"
-        echo "|Correct Syntax: 'new (dir|file)<Directory> <Folder name>                            |"
-        echo "+------------------------------------------------------------------------------------+"
-        afplay ./storage/assets/error.mov
-    fi
+        if [[ $# == 3 ]]; then
+          cd $2
+          touch $3
+          cd "${INSTALLDIR}"
+          echo "$INSTALLDIR"
+          echo "Successfully created the file $3 at path $2"   
+        else
+          echo "+------------------------------------------------------------------------------------+"
+          echo "|Syntax error: This command only accepts 2 or 3 arguments, $# arguments were provided|"
+          echo "|Correct Syntax: 'new (dir|file) <Directory> <Folder name>                            |"
+          echo "+------------------------------------------------------------------------------------+"
+          afplay ./storage/assets/error.mov
+          exit 1
+        fi
+      fi
+    fi 
+  fi
 fi
 
-if [ $1 == "new" ]; then
-    if [ $2 == "dir" ]; then
-        if [ $# == 3 ]; then
-            mkdir $3
-            echo "Successfully created the folder at the current path $2"
-          else
-           if [ $# == 3 ]; then
-               cd $2
-               mkdir $3
-               cd "${INSTALLDIR}"
-               echo "$INSTALLDIR"
-               echo "Successfully created the folder $3 at path $2"   
-             else
-              echo "+------------------------------------------------------------------------------------+"
-              echo "|Syntax error: This command only accepts 2 or 3 arguments, $# arguments were provided|"
-              echo "|Correct Syntax: 'repo new (dir|file) <Repo ID> <Folder name>                        |"
-              echo "+------------------------------------------------------------------------------------+"
-              afplay ./storage/assets/error.mov
-              exit 1
-           fi
-        fi
-  else
-    if [ $1 == "file" ]; then
-        if [ $# == 2 ]; then
-            touch $2
-            echo "Successfully created the file $2 at the current path"
-          else
-           if [ $# == 3 ]; then
-               cd $2
-               touch $3
-               cd "${INSTALLDIR}"
-               echo "$INSTALLDIR"
-               echo "Successfully created the file $3 at path $2"   
-             else
-              echo "+------------------------------------------------------------------------------------+"
-              echo "|Syntax error: This command only accepts 2 or 3 arguments, $# arguments were provided|"
-              echo "|Correct Syntax: 'new (dir|file) <Directory> <Folder name>                            |"
-              echo "+------------------------------------------------------------------------------------+"
-              afplay ./storage/assets/error.mov
-              exit 1
-           fi
-        fi    
+
+if [[ $# == 0 ]]; then
+  echo "
+Invalid sub-command, valid commands are:
+––––––––––––––––––––––––––––––––––––––––
+- create
+- clone
+– open
+– new
+– file
+
+"
+
+  afplay ./storage/assets/error.mov
+  exit 1
 fi
