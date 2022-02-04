@@ -1,3 +1,5 @@
+# Main file is TestGXS.exe
+
 # COPYRIGHT ISSUE IMBOUND!
 This is just a proof of concept. don't sue us
 
