@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source variables
+
+echo " 
++-----------------------------------------Gameplex Software Developer tools v:$VERSIONID--------------------------------------------+
+|                                                                                                                              |
+| help – Displays Help Information screen                remove – Deletes a file                                               |        
+| repo – Access the GXS Version control system           test – Verifies that your inastallation of our tools is intact        |
+| new – Can create new files or folders on your system   print - Prints text to screen in box                                  |
+| rename – rename a file in any location                                                                                       |
++------------------------------------------------------------------------------------------------------------------------------+"
