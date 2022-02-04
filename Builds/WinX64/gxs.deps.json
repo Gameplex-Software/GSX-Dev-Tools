@@ -1,12 +1,12 @@
 {
   "runtimeTarget": {
-    "name": ".NETCoreApp,Version=v6.0/win-arm64",
+    "name": ".NETCoreApp,Version=v6.0/win-x64",
     "signature": ""
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {},
-    ".NETCoreApp,Version=v6.0/win-arm64": {
+    ".NETCoreApp,Version=v6.0/win-x64": {
       "gxs/1.0.0": {
         "runtime": {
           "gxs.dll": {}
