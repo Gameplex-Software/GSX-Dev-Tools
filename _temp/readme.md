@@ -3,4 +3,4 @@ You're still free to use the source code and __recompile__ (**make sure to modif
 ---
 # How to use:
 Log -log stuff here
-*NOTE: MAKE SURE IF YOU'RE EXECUTING THIS USING BATCH, MAKE SURE TO USE 'START LOG -LOGSTUFFHERE'
+*NOTE: IF YOU'RE EXECUTING THIS USING BATCH, MAKE SURE TO USE 'START LOG -LOGSTUFFHERE'
